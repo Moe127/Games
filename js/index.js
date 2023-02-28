@@ -1,0 +1,130 @@
+async function game() {
+  let categories = document.querySelectorAll(".nav-link");
+  let category = "MMORPG";
+  let data = await getDataByCategory(category);
+  categories.forEach((category) => {
+    category.addEventListener("click", async (e) => {
+      categories.forEach((category) => {
+        if (category.textContent !== e.target.textContent) {
+          category.classList.remove("active");
+        } else {
+          category.classList.add("active");
+        }
+      });
+
+      let data = await getDataByCategory(category.textContent);
+    });
+  });
+  // hide game data and show game details when clicking on each game card and hiding game details when click close button
+  document.addEventListener("click", async (e) => {
+    if (e.target.dataset.id) {
+      getDetailsById(e.target.dataset.id);
+      document
+        .querySelector(".game-data")
+        .classList.replace("d-block", "d-none");
+      document
+        .querySelector(".game-details")
+        .classList.replace("d-none", "d-block");
+    }
+    if (e.target.classList.contains("close")) {
+      let currentCategory = document.querySelector(".active").textContent;
+      document
+        .querySelector(".game-data")
+        .classList.replace("d-none", "d-block");
+      document
+        .querySelector(".game-details")
+        .classList.replace("d-block", "d-none");
+      getDataByCategory(currentCategory);
+    }
+  });
+}
+
+function displayData(data) {
+  let carton = ``;
+  for (let i = 0; i < data.length; i++) {
+    carton += `<div class="col-md-3 " data-id="${data[i].id}">
+        <div class="game-card border shadow" role="button" data-id="${data[i].id}">
+        <img src="${data[i].thumbnail}" class="card-img-top object-fit-cover h-100 list-img" alt="" data-id="${data[i].id}"/>
+        <div class="game-head d-flex justify-content-between text-white" data-id="${data[i].id}">
+                <h3>${data[i].title}</h3>
+                <span class="badge text-bg-primary">free</span data-id="${data[i].id}">
+              </div>
+              <p class="text-light text-center fs-6" data-id="${data[i].id}">
+                ${data[i].short_description}
+              </p>
+              <div class="tags d-flex justify-content-between" data-id="${data[i].id}">
+                <span class="badge text-bg-danger" data-id="${data[i].id}">${data[i].genre}</span>
+                <span class="badge text-bg-danger" data-id="${data[i].id}">${data[i].platform}</span >
+              </div>
+            </div>
+          </div>`;
+  }
+
+  document.querySelector(".game-list").innerHTML = carton;
+}
+
+async function getDataByCategory(category) {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "b054e8d86amsh4a2397ede8c5812p1f8e77jsnd6e2c79057af",
+      "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com",
+    },
+  };
+  let res = await fetch(
+    `https://free-to-play-games-database.p.rapidapi.com/api/games?category=${category}`,
+    options
+  );
+  let data = await res.json();
+  displayData(data);
+}
+
+async function getDetailsById(id) {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "b054e8d86amsh4a2397ede8c5812p1f8e77jsnd6e2c79057af",
+      "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com",
+    },
+  };
+  let res = await fetch(
+    `https://free-to-play-games-database.p.rapidapi.com/api/game?id=${id}`,
+    options
+  );
+  let data = await res.json();
+  displayGameDetails(data);
+}
+
+function displayGameDetails(data) {
+  let carton = ``;
+
+  carton = `<div class="col-md-4">
+            <img src="${data.thumbnail}" alt="" />
+          </div>
+          <div class="col-md-6">
+            <div class="game-details-content">
+              <h3>Title:${data.title}</h3>
+              <p>
+                category:
+                <span class="badge bg-danger">${data.genre}</span>
+              </p>
+              <p>
+                category:
+                <span class="badge bg-danger">${data.platform}</span>
+              </p>
+              <p>
+                category:
+                <span class="badge bg-danger">${data.status}</span>
+              </p>
+              <p>
+              ${data.description}
+              </p>
+              <a class="btn btn-outline-warning mb-5" href="${data.game_url}" target="_blank">Show Game</a>
+            </div>
+          </div>`;
+
+  console.log(carton);
+  document.querySelector(".game-details-carton").innerHTML = carton;
+}
+
+game();

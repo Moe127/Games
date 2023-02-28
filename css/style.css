@@ -1,0 +1,44 @@
+/* general styles */
+:root {
+  --bg-color: #272b30;
+  --accent-color: #3a497b;
+  --head-color: #ffffff;
+}
+
+.bg-home {
+  background-color: var(--bg-color);
+}
+
+/* game img */
+.game-bg {
+  max-height: 30vh;
+  object-fit: cover;
+}
+.list-img {
+  -webkit-filter: grayscale(70%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(70%);
+  transition: all 0.5s;
+}
+
+/* game-card */
+.game-card:hover .list-img {
+  -webkit-filter: grayscale(0); /* Safari 6.0 - 9.0 */
+  filter: grayscale(0);
+}
+/* nav */
+.bg-nav {
+  background-color: var(--accent-color);
+}
+.games-logo {
+  width: 20%;
+}
+nav .navbar-nav a {
+  color: var(--head-color);
+  transition: all 0.5s;
+}
+nav .navbar-nav a:hover {
+  color: #09c;
+}
+nav .navbar-nav .active {
+  color: #09c !important;
+}
