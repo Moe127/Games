@@ -64,22 +64,26 @@ async function game() {
 function displayData(data) {
   let carton = ``;
   for (let i = 0; i < data.length; i++) {
-    carton += `<div class="col-md-3 " data-id="${data[i].id}">
-        <div class="game-card border shadow" role="button" data-id="${data[i].id}">
-        <img src="${data[i].thumbnail}" class="card-img-top  object-fit-cover h-100 list-img" alt="" data-id="${data[i].id}"/>
-        <div class="game-head d-flex justify-content-between text-white" data-id="${data[i].id}">
-                <h3>${data[i].title}</h3>
-                <span class="badge text-bg-primary">free</span data-id="${data[i].id}">
-              </div>
-              <p class="text-light text-center fs-6" data-id="${data[i].id}">
-                ${data[i].short_description}
-              </p>
-              <div class="tags d-flex justify-content-between" data-id="${data[i].id}">
-                <span class="badge text-bg-danger" data-id="${data[i].id}">${data[i].genre}</span>
-                <span class="badge text-bg-danger" data-id="${data[i].id}">${data[i].platform}</span >
-              </div>
+    carton += `  
+    <div class="col-md-3">
+    <div class="game-card border border-dark shadow card h-100  bg-transparent" role="button" data-id="${data[i].id}">
+    <div class="card-body" data-id="${data[i].id}">
+    <img src="${data[i].thumbnail}" class="card-img-top list-img" alt="${data[i].title}" data-id="${data[i].id}">
+    <div class="hstack justify-content-between my-4" data-id="${data[i].id}">
+       <h6 class="text-white small d-inline game-title">${data[i].title}</h6>
+       <span class="badge text-bg-primary p-2 free-badge">free</span data-id="${data[i].id}">
+       </div>
+          <p class=" card-text text-muted text-center fs-6" data-id="${data[i].id}">
+               ${data[i].short_description}
+           </p>
+    </div>
+         <div class=" card-footer  tags d-flex justify-content-between" data-id="${data[i].id}">
+              <span class="badge text-bg-dark" data-id="${data[i].id}">${data[i].genre}</span>
+               <span class="badge text-bg-dark" data-id="${data[i].id}">${data[i].platform}</span >
             </div>
-          </div>`;
+  </div>
+  </div>
+  `;
   }
 
   document.querySelector(".game-list").innerHTML = carton;
