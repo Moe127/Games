@@ -1,7 +1,12 @@
 async function game() {
-  let categories = document.querySelectorAll(".nav-link");
+  const loader = document.querySelector(".loader");
+  const gameData = document.querySelector(".game-data");
+  const gameDetails = document.querySelector(".game-details");
+  const categories = document.querySelectorAll(".nav-link");
   let category = "MMORPG";
-  let data = await getDataByCategory(category);
+
+  const data = await getDataByCategory(category);
+
   categories.forEach((category) => {
     category.addEventListener("click", async (e) => {
       categories.forEach((category) => {
@@ -19,21 +24,13 @@ async function game() {
   document.addEventListener("click", async (e) => {
     if (e.target.dataset.id) {
       getDetailsById(e.target.dataset.id);
-      document
-        .querySelector(".game-data")
-        .classList.replace("d-block", "d-none");
-      document
-        .querySelector(".game-details")
-        .classList.replace("d-none", "d-block");
+      gameData.classList.replace("d-block", "d-none");
+      gameDetails.classList.replace("d-none", "d-block");
     }
     if (e.target.classList.contains("close")) {
       let currentCategory = document.querySelector(".active").textContent;
-      document
-        .querySelector(".game-data")
-        .classList.replace("d-none", "d-block");
-      document
-        .querySelector(".game-details")
-        .classList.replace("d-block", "d-none");
+      gameData.classList.replace("d-none", "d-block");
+      gameDetails.classList.replace("d-block", "d-none");
       getDataByCategory(currentCategory);
     }
   });
@@ -64,6 +61,10 @@ function displayData(data) {
 }
 
 async function getDataByCategory(category) {
+  const loader = document.querySelector(".loader");
+  const gameData = document.querySelector(".game-data");
+  loader.classList.replace("d-none", "d-block");
+  gameData.classList.replace("d-block", "d-none");
   const options = {
     method: "GET",
     headers: {
@@ -76,10 +77,21 @@ async function getDataByCategory(category) {
     options
   );
   let data = await res.json();
+  if (data) {
+    loader.classList.replace("d-block", "d-none");
+    gameData.classList.replace("d-none", "d-block");
+  }
+
   displayData(data);
 }
 
 async function getDetailsById(id) {
+  const gameDetails = document.querySelector(".game-details");
+  const loader = document.querySelector(".loader");
+
+  loader.classList.replace("d-none", "d-block");
+  gameDetails.classList.replace("d-block", "d-none");
+
   const options = {
     method: "GET",
     headers: {
@@ -92,6 +104,10 @@ async function getDetailsById(id) {
     options
   );
   let data = await res.json();
+  if (data) {
+    loader.classList.replace("d-block", "d-none");
+    gameDetails.classList.replace("d-none", "d-block");
+  }
   displayGameDetails(data);
 }
 
