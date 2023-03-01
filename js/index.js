@@ -1,3 +1,23 @@
+const nav = document.querySelector("nav");
+
+// Get the offset position of the navbar
+const sticky = nav.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove the sticky class when you leave the scroll position.
+function myFunction() {
+  if (window.scrollY >= sticky) {
+    console.log("trus");
+    nav.classList.add("position-fixed");
+    nav.classList.add("top-0");
+    nav.classList.add("end-0");
+    nav.classList.add("start-0");
+    nav.style.zIndex = "2";
+  } else {
+    nav.classList.remove("position-fixed");
+  }
+}
+
+window.addEventListener("scroll", myFunction);
 async function game() {
   // getting the game data element
   const gameData = document.querySelector(".game-data");
@@ -45,7 +65,7 @@ function displayData(data) {
   for (let i = 0; i < data.length; i++) {
     carton += `<div class="col-md-3 " data-id="${data[i].id}">
         <div class="game-card border shadow" role="button" data-id="${data[i].id}">
-        <img src="${data[i].thumbnail}" class="card-img-top object-fit-cover h-100 list-img" alt="" data-id="${data[i].id}"/>
+        <img src="${data[i].thumbnail}" class="card-img-top  object-fit-cover h-100 list-img" alt="" data-id="${data[i].id}"/>
         <div class="game-head d-flex justify-content-between text-white" data-id="${data[i].id}">
                 <h3>${data[i].title}</h3>
                 <span class="badge text-bg-primary">free</span data-id="${data[i].id}">

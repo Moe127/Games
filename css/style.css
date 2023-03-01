@@ -4,6 +4,12 @@
   --accent-color: #3a497b;
   --head-color: #ffffff;
 }
+* {
+  box-sizing: border-box;
+}
+body {
+  scroll-behavior: smooth;
+}
 
 .bg-home {
   background-color: var(--bg-color);
