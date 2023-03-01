@@ -32,6 +32,9 @@ body {
   filter: grayscale(0);
 }
 /* nav */
+nav {
+  transition: all 0.3s;
+}
 .bg-nav {
   background-color: var(--accent-color);
 }

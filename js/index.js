@@ -16,8 +16,9 @@ function myFunction() {
     nav.classList.remove("position-fixed");
   }
 }
-
+// trigger myFunction when the window touch the navbar
 window.addEventListener("scroll", myFunction);
+
 async function game() {
   // getting the game data element
   const gameData = document.querySelector(".game-data");
@@ -132,7 +133,7 @@ async function getDetailsById(id) {
   let data = await res.json();
   if (data) {
     loader.classList.replace("d-block", "d-none");
-    // gameDetails.classList.replace("d-none", "d-block");
+    gameDetails.classList.replace("d-none", "d-block");
   }
   displayGameDetails(data);
 }
