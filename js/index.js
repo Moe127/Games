@@ -69,11 +69,11 @@ function displayData(data) {
     <div class="game-card border border-dark shadow card h-100  bg-transparent" role="button" data-id="${data[i].id}">
     <div class="card-body" data-id="${data[i].id}">
     <img src="${data[i].thumbnail}" class="card-img-top list-img" alt="${data[i].title}" data-id="${data[i].id}">
-    <div class="hstack justify-content-between my-4" data-id="${data[i].id}">
+    <div class="hstack justify-content-between my-3" data-id="${data[i].id}">
        <h6 class="text-white small d-inline game-title">${data[i].title}</h6>
        <span class="badge text-bg-primary p-2 free-badge">free</span data-id="${data[i].id}">
        </div>
-          <p class=" card-text text-muted text-center fs-6" data-id="${data[i].id}">
+          <p class=" card-text text-muted text-center game-description" data-id="${data[i].id}">
                ${data[i].short_description}
            </p>
     </div>
