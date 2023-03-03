@@ -35,9 +35,12 @@ body {
   -webkit-filter: grayscale(0); /* Safari 6.0 - 9.0 */
   filter: grayscale(0);
 }
-.game-description {
+.game-description,
+.game-details-desc {
   font-size: 0.9rem;
+  line-height: 1.5;
 }
+
 .game-card {
   overflow: hidden;
   transition: all 0.5s;
